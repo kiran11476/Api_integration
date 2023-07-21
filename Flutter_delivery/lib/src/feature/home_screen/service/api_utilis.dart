@@ -33,32 +33,12 @@ class ApiUtils {
     ]);
   }
 
-  Future<Response> delete({
-    required String api,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    bool doTokenRequired = false,
-    bool doFormUrlEncode = false,
-  }) async {
-    var result = await _dio.delete(
-      api,
-      queryParameters: queryParameters,
-      options: picOption(options, doTokenRequired, doFormUrlEncode),
-    );
-    return result;
-  }
-
   Future<Response> get({
     required String url,
-    Map<String, dynamic>? queryParameters,
     Options? options,
-    bool doTokenRequired = false,
-    bool doFormUrlEncode = false,
   }) async {
     var result = await _dio.get(
       url,
-      queryParameters: queryParameters,
-      options: picOption(options, doTokenRequired, doFormUrlEncode),
     );
     return result;
   }
@@ -133,55 +113,5 @@ class ApiUtils {
             ? optionsWithTokenAndEncodedBody
             : optionsWithTokenOnly
         : optionWithNoToken;
-  }
-
-  Future<Response> post(
-      {required String url,
-      data,
-      Map<String, dynamic>? queryParameters,
-      Options? options,
-      bool doTokenRequired = false,
-      bool doFormUrlEncode = false}) async {
-    var result = await _dio.post(
-      url,
-      data: data,
-      queryParameters: queryParameters,
-      options: picOption(options, doTokenRequired, doFormUrlEncode),
-    );
-    return result;
-  }
-
-  Future<Response> postWithProgress(
-      {required String url,
-      data,
-      Map<String, dynamic>? queryParameters,
-      Options? options,
-      ProgressCallback? onSendProgress,
-      bool doTokenRequired = false,
-      bool doFormUrlEncode = false}) async {
-    var result = await _dio.post(
-      url,
-      data: data,
-      queryParameters: queryParameters,
-      options: picOption(options, doTokenRequired, doFormUrlEncode),
-      onSendProgress: onSendProgress,
-    );
-    return result;
-  }
-
-  Future<Response> put(
-      {required String url,
-      data,
-      Map<String, dynamic>? queryParameters,
-      Options? options,
-      bool doTokenRequired = false,
-      bool doFormUrlEncode = false}) async {
-    var result = await _dio.put(
-      url,
-      data: data,
-      queryParameters: queryParameters,
-      options: picOption(options, doTokenRequired, doFormUrlEncode),
-    );
-    return result;
   }
 }

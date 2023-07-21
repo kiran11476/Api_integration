@@ -14,7 +14,8 @@ class ProductController extends GetxController {
       (() => ApiServices().fetchData()),
     ).run().then((value) {
       loading.value = false;
-      value.fold((l) => null, (r) => statusList.value = r);
+      value.fold(
+          (l) => null, (r) => statusList.value = r as List<RestaurantModel>?);
     });
   }
 
