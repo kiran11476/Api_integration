@@ -4,12 +4,12 @@ import 'package:flutter_application_delivery/src/feature/home_screen/controller/
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  final ProductController productController = Get.put(ProductController());
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final ProductController dataController = Get.put(ProductController());
+
     return Scaffold(
       appBar: AppBar(
           actions: [
@@ -31,7 +31,11 @@ class HomeScreen extends StatelessWidget {
             itemBuilder: (BuildContext, index) {
               return ListTile(
                 leading: Text(dataController
-                    .statusList.value![index].items![index].name!),
+                            .statusList.value![index].items![index].name !=
+                        null
+                    ? dataController
+                        .statusList.value![index].items![index].name!
+                    : ''),
               );
             },
           )),

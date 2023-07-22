@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 50,
                 fontWeight: FontWeight.w500,
                 onPressed: () =>
-                    Navigator.push(context, route(page: HomeScreen())),
+                    Navigator.push(context, route(page: const HomeScreen())),
               )
             ],
           ),

@@ -5,19 +5,20 @@ import 'base_model.dart';
 import 'base_repo.dart';
 
 class ApiServices {
-  Future<Either<dynamic, RestaurantModel>> fetchData() async {
+  Future<Either<dynamic, List<RestaurantModel>>> fetchData() async {
     return BaseRepo().get().then((value) {
       try {
         if (value != null) {
           BaseModel response = BaseModel.fromMap(value);
-          if (response.status != codeSuccess) {
+          if (value == null) {
             return left({
               paramStatusCode: response.status,
               paramMessage: response.message
             });
           }
-
-          return right(RestaurantModel.fromJson(response.model));
+          List<RestaurantModel> data = List<RestaurantModel>.from(
+              (response.model).map((e) => RestaurantModel.fromMap(e)));
+          return right(data);
         }
       } catch (_) {
         return left(value);

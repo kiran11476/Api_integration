@@ -6,17 +6,22 @@ import '../service/api.dart';
 
 class ProductController extends GetxController {
   final loading = false.obs;
-  final statusList = Rxn(<RestaurantModel>[]);
+  final statusList = Rxn<List<RestaurantModel>>();
+
   fetchStatus() async {
     loading.value = true;
-
     await Task(
       (() => ApiServices().fetchData()),
     ).run().then((value) {
       loading.value = false;
-      value.fold(
-          (l) => null, (r) => statusList.value = r as List<RestaurantModel>?);
+      value.fold((l) => null, (r) => statusList.value = r);
     });
+  }
+
+  @override
+  void onReady() {
+    fetchStatus();
+    super.onReady();
   }
 
   @override
